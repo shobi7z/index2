@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إضافة طلب جديد</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            padding: 15px 20px;
+            border: none;
+            background-color: #6200ea;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .form-group button:hover {
+            background-color: #3700b3;
+        }
+        .notification {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 15px;
+            background-color: #4caf50;
+            color: white;
+            border-radius: 4px;
+            font-size: 16px;
+            z-index: 1000;
+            text-align: center;
+        }
+        .notification.error {
+            background-color: #f44336;
+        }
+        .notification.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>إضافة طلب جديد</h1>
+        <form id="addRequestForm">
+            <div class="form-group">
+                <label for="orderNumber">رقم الشحنة</label>
+                <input type="text" id="orderNumber" name="orderNumber" required>
+            </div>
+            <div class="form-group">
+                <label for="customerUsername">يوزر الزبون</label>
+                <input type="text" id="customerUsername" name="customerUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="cartLink">رابط العربة</label>
+                <input type="text" id="cartLink" name="cartLink" required>
+            </div>
+            <div class="form-group">
+                <label for="province">المحافظة</label>
+                <select id="province" name="province" required>
+                    <option value="Baghdad">بغداد</option>
+                    <option value="Basra">البصرة</option>
+                    <option value="Nineveh">نينوى</option>
+                    <option value="Karbala">كربلاء</option>
+                    <option value="Najaf">النجف</option>
+                    <option value="Dhi Qar">ذي قار</option>
+                    <option value="Erbil">أربيل</option>
+                    <option value="Sulaymaniyah">السليمانية</option>
+                    <option value="Dohuk">دهوك</option>
+                    <option value="Salah ad-Din">صلاح الدين</option>
+                    <option value="Anbar">الأنبار</option>
+                    <option value="Al-Muthanna">المثنى</option>
+                    <option value="Qadisiyyah">القادسية</option>
+                    <option value="Babil">بابيل</option>
+                    <option value="Wasit">واسط</option>
+                    <option value="Maysan">ميسان</option>
+                    <option value="Kirkuk">كركوك</option>
+                    <option value="Diyala">ديالى</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="address">العنوان</label>
+                <input type="text" id="address" name="address" required>
+            </div>
+            <div class="form-group">
+                <label for="phone1">رقم الهاتف الأول</label>
+                <input type="tel" id="phone1" name="phone1" required>
+            </div>
+            <div class="form-group">
+                <label for="phone2">رقم الهاتف الثاني</label>
+                <input type="tel" id="phone2" name="phone2">
+            </div>
+            <div class="form-group">
+                <label for="totalPrice">السعر الكلي</label>
+                <input type="number" id="totalPrice" name="totalPrice" required>
+            </div>
+            <div class="form-group">
+                <label for="productLink1">رابط المنتج المكرر 1</label>
+                <input type="text" id="productLink1" name="productLink1">
+                <input type="number" id="productCount1" name="productCount1" size="4" placeholder="العدد">
+            </div>
+            <div class="form-group">
+                <label for="productLink2">رابط المنتج المكرر 2</label>
+                <input type="text" id="productLink2" name="productLink2">
+                <input type="number" id="productCount2" name="productCount2" size="4" placeholder="العدد">
+            </div>
+            <div class="form-group">
+                <label for="productLink3">رابط المنتج المكرر 3</label>
+                <input type="text" id="productLink3" name="productLink3">
+                <input type="number" id="productCount3" name="productCount3" size="4" placeholder="العدد">
+            </div>
+            <div class="form-group">
+                <label for="productLink4">رابط المنتج المكرر 4</label>
+                <input type="text" id="productLink4" name="productLink4">
+                <input type="number" id="productCount4" name="productCount4" size="4" placeholder="العدد">
+            </div>
+            <div class="form-group">
+                <label for="productLink5">رابط المنتج المكرر 5</label>
+                <input type="text" id="productLink5" name="productLink5">
+                <input type="number" id="productCount5" name="productCount5" size="4" placeholder="العدد">
+            </div>
+            <div class="form-group">
+                <label for="productLink6">رابط المنتج المكرر 6</label>
+                <input type="text" id="productLink6" name="productLink6">
+                <input type="number" id="productCount6" name="productCount6" size="4" placeholder="العدد">
+            </div>
+            <div class="form-group">
+                <label for="productLink7">رابط المنتج المكرر 7</label>
+                <input type="text" id="productLink7" name="productLink7">
+                <input type="number" id="productCount7" name="productCount7" size="4" placeholder="العدد">
+            </div>
+            <div class="form-group">
+                <button type="submit">إضافة الطلب</button>
+            </div>
+        </form>
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
+      import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBI6VNgwCKdG2X52wC2b20t7or8p4rjFB8",
+        authDomain: "vndr11.firebaseapp.com",
+        projectId: "vndr11",
+        storageBucket: "vndr11.appspot.com",
+        messagingSenderId: "411092840558",
+        appId: "1:411092840558:web:5d38f8a50d5eaada2a767f",
+        measurementId: "G-77M15Z0H07"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      document.getElementById('addRequestForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const orderNumber = document.getElementById('orderNumber').value;
+        const customerUsername = document.getElementById('customerUsername').value;
+        const cartLink = document.getElementById('cartLink').value;
+        const province = document.getElementById('province').value;
+        const address = document.getElementById('address').value;
+        const phone1 = document.getElementById('phone1').value;
+        const phone2 = document.getElementById('phone2').value;
+        const totalPrice = document.getElementById('totalPrice').value;
+        const productLink1 = document.getElementById('productLink1').value;
+        const productCount1 = document.getElementById('productCount1').value;
+        const productLink2 = document.getElementById('productLink2').value;
+        const productCount2 = document.getElementById('productCount2').value;
+        const productLink3 = document.getElementById('productLink3').value;
+        const productCount3 = document.getElementById('productCount3').value;
+        const productLink4 = document.getElementById('productLink4').value;
+        const productCount4 = document.getElementById('productCount4').value;
+        const productLink5 = document.getElementById('productLink5').value;
+        const productCount5 = document.getElementById('productCount5').value;
+        const productLink6 = document.getElementById('productLink6').value;
+        const productCount6 = document.getElementById('productCount6').value;
+        const productLink7 = document.getElementById('productLink7').value;
+        const productCount7 = document.getElementById('productCount7').value;
+
+        try {
+          await addDoc(collection(db, "orders"), {
+            orderNumber,
+            customerUsername,
+            cartLink,
+            province,
+            address,
+            phone1,
+            phone2,
+            totalPrice,
+            productLink1,
+            productCount1,
+            productLink2,
+            productCount2,
+            productLink3,
+            productCount3,
+            productLink4,
+            productCount4,
+            productLink5,
+            productCount5,
+            productLink6,
+            productCount6,
+            productLink7,
+            productCount7
+          });
+
+          // Show success notification
+          const notification = document.getElementById('notification');
+          notification.textContent = 'تم إضافة الطلب بنجاح';
+          notification.classList.add('show');
+
+          // Hide notification after 3 seconds and reload the page
+          setTimeout(() => {
+            notification.classList.remove('show');
+            window.location.href = 'manage-orders.html';
+          }, 3000);
+        } catch (error) {
+          // Show error notification
+          const notification = document.getElementById('notification');
+          notification.textContent = 'حدث خطأ أثناء إضافة الطلب';
+          notification.classList.add('error', 'show');
+          setTimeout(() => {
+            notification.classList.remove('show');
+          }, 3000);
+        }
+      });
+    </script>
+</body>
+</html>
